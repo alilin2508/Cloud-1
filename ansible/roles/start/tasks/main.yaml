@@ -1,0 +1,48 @@
+- name: clone project
+  ansible.builtin.git:
+    repo: https://github.com/clemedon/inception.git
+    dest: /home/inception
+
+- name: update cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install docker packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add Docker s official GPG key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Install docker
+  ansible.builtin.apt:
+    name: docker.io
+    state: latest
+
+- name: Creates directory
+  ansible.builtin.file:
+    path: 'root/.docker/cli-plugins'
+    state: directory
+
+- name: Install docker-compose
+  get_url:
+    url : https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-linux-x86_64
+    dest: 'root/.docker/cli-plugins'
+    mode: 'u+x,g+x'
+
+- name: install Make
+  ansible.builtin.apt:
+    name: make
+
+- name: build 'all' target with a custom Makefile
+  community.general.make:
+    chdir: /home/inception
