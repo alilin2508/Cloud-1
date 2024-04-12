@@ -30,14 +30,18 @@
 
 - name: Creates directory
   ansible.builtin.file:
-    path: 'root/.docker/cli-plugins'
+    path: '/root/.docker/cli-plugins'
     state: directory
 
 - name: Install docker-compose
   get_url:
     url : https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-linux-x86_64
-    dest: 'root/.docker/cli-plugins'
+    dest: '/root/.docker/cli-plugins/docker-compose'
     mode: 'u+x,g+x'
+
+- name: Wait until docker compose is installed
+  ansible.builtin.wait_for:
+    path: '/root/.docker/cli-plugins/docker-compose'
 
 - name: install Make
   ansible.builtin.apt:
