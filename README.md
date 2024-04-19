@@ -56,10 +56,17 @@
   $ terraform apply -auto-approve
   $ terraform output public_ip >../ansible/hosts
   $ cd ../ansible
+```
+
+  Bind your instance IP address to a domain name (free ones on duckdns.org) and
+  update the .env `DOMAIN_NAME` variable accordinly.
+
+```
   $ ansible-playbook -i hosts install.yaml
 ```
 
   Don't forget to `$ terraform  apply -destroy -auto-approve` one done.
+
 
 # Todo
 
@@ -70,3 +77,5 @@
   - update makefile
   - domain name
   - réparer le site
+  - vault le .env
+  - create registry
