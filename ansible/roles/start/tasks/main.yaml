@@ -1,9 +1,17 @@
-- name: clone project
+- name: Waits for instances to become reachable
+  ansible.builtin.wait_for_connection:
+
+- name: Clone project
   ansible.builtin.git:
     repo: https://github.com/clemedon/inception.git
-    dest: /home/inception
+    dest: /home/cloud-1
 
-- name: update cache
+- name: Copy .env file
+  ansible.builtin.copy:
+    src: ../srcs/.env
+    dest: /home/cloud-1/srcs
+
+- name: Update cache
   ansible.builtin.apt:
     update_cache: yes
 
@@ -43,10 +51,10 @@
   ansible.builtin.wait_for:
     path: '/root/.docker/cli-plugins/docker-compose'
 
-- name: install Make
+- name: Install Make
   ansible.builtin.apt:
     name: make
 
 - name: build 'all' target with a custom Makefile
   community.general.make:
-    chdir: /home/inception
+    chdir: /home/cloud-1

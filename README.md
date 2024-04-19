@@ -70,8 +70,9 @@
 
 # Todo
 
-  - ping instance in ansible playbook
+  - ~~ping instance in ansible playbook~~
   - install and configure phpmyadmin
+<<<<<<< Updated upstream
   - server auto-reboot if poweroff
   - deploy on multiple servers
   - update makefile
@@ -79,3 +80,10 @@
   - réparer le site
   - vault le .env
   - create registry
+=======
+  - ~~server auto-reboot if instance reboot~~
+  - ~~deploy on multiple servers~~
+  - update makefile to terraform and ansible
+  - ~~domain name~~
+  - ~~réparer le site~~
+>>>>>>> Stashed changes
