@@ -29,6 +29,14 @@ stop:
 down:
 	-docker compose --file $(COMPOSE) down && echo "[make] down ok"
 
+# launches cloud infra
+launch_cloud:
+	-cd terraform/ ; terraform apply -auto-approve ; terraform output public_ip1 >../ansible/hosts ; terraform output public_ip2 >>../ansible/hosts
+	-cd ansible/ ; ansible-playbook -i hosts install.yaml
+
+destroy_cloud:
+	-cd terraform/ ; terraform  apply -destroy -auto-approve
+
 # remove docker containers, networks and volumes
 clean:
 	-docker compose --file $(COMPOSE) down --volumes --remove-orphans && echo "[make] clean ok"

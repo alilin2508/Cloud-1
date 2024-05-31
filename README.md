@@ -54,7 +54,8 @@
   $ git clone https://github.com/alilin2508/Cloud-1
   $ cd Cloud-1/terraform
   $ terraform apply -auto-approve
-  $ terraform output public_ip >../ansible/hosts
+  $ terraform output public_ip1 >../ansible/hosts
+  $ terraform output public_ip2 >>../ansible/hosts
   $ cd ../ansible
 ```
 
@@ -72,18 +73,14 @@
 
   - ~~ping instance in ansible playbook~~
   - install and configure phpmyadmin
-<<<<<<< Updated upstream
-  - server auto-reboot if poweroff
-  - deploy on multiple servers
-  - update makefile
-  - domain name
-  - réparer le site
-  - vault le .env
-  - create registry
-=======
-  - ~~server auto-reboot if instance reboot~~
+  - ~~server auto-reboot if poweroff~~
   - ~~deploy on multiple servers~~
-  - update makefile to terraform and ansible
   - ~~domain name~~
   - ~~réparer le site~~
->>>>>>> Stashed changes
+  - vault le .env
+  - create registry
+  - ~~server auto-reboot if instance reboot~~
+  - ~~deploy on multiple servers~~
+  - ~~update makefile to terraform and ansible~~
+  - ~~domain name~~
+  - ~~réparer le site~~
