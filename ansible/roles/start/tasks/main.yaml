@@ -8,7 +8,7 @@
 
 - name: Copy .env file
   ansible.builtin.copy:
-    src: ../srcs/.env
+    src: ../.env
     dest: /home/cloud-1/srcs
 
 - name: Update cache

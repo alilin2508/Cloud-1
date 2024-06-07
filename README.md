@@ -52,7 +52,12 @@
 
 ```
   $ git clone https://github.com/alilin2508/Cloud-1
-  $ cd Cloud-1/terraform
+  $ cd Cloud-1
+  $ mv env .env
+```  
+Then:
+```
+  $ cd terraform
   $ terraform apply -auto-approve
   $ terraform output public_ip1 >../ansible/hosts
   $ terraform output public_ip2 >>../ansible/hosts
@@ -65,8 +70,14 @@
 ```
   $ ansible-playbook -i hosts install.yaml
 ```
+Or simply:
+```
+  $ make launch_cloud
+```
 
-  Don't forget to `$ terraform  apply -destroy -auto-approve` one done.
+----------
+
+  **Don't forget to** `$ terraform  apply -destroy -auto-approve` one done or `$ make destroy_cloud`
 
 
 # Todo
@@ -79,8 +90,4 @@
   - ~~réparer le site~~
   - vault le .env
   - create registry
-  - ~~server auto-reboot if instance reboot~~
-  - ~~deploy on multiple servers~~
   - ~~update makefile to terraform and ansible~~
-  - ~~domain name~~
-  - ~~réparer le site~~
