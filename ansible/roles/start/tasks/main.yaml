@@ -3,7 +3,7 @@
 
 - name: Clone project
   ansible.builtin.git:
-    repo: https://github.com/clemedon/inception.git
+    repo: https://github.com/alilin2508/Inception.git
     dest: /home/cloud-1
 
 - name: Copy .env file
