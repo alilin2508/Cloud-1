@@ -1,9 +1,7 @@
-```
-
-  Create a Scaleway account, install and configure your Scaleway CLI.  Create a
-  project on your Scaleway account, fetch your project ID and put it in the
-  `project_id` field in `terraform/main.tf`.  Add your SSH public key to your
-  project.
+Create a Scaleway account, install and configure your Scaleway CLI.  Create a
+project on your Scaleway account, fetch your project ID and put it in the
+`project_id` field in `terraform/main.tf`.  Add your SSH public key to your
+project.
 
 ```
   $ git clone https://github.com/alilin2508/Cloud-1
@@ -19,8 +17,8 @@ Then:
   $ cd ../ansible
 ```
 
-  Bind your instance IP address to a domain name (free ones on duckdns.org) and
-  update the .env `DOMAIN_NAME` variable accordinly.
+Bind your instance IP address to a domain name (free ones on duckdns.org) and
+update the .env `DOMAIN_NAME` variable accordinly.
 
 ```
   $ ansible-playbook -i hosts install.yaml
