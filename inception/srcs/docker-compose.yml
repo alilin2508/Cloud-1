@@ -1,0 +1,74 @@
+services:
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - DB_NAME=${MYSQL_DATABASE}
+      - DB_USER=${TF_VAR_MYSQL_USER}
+      - DB_PASSWORD=${TF_VAR_MYSQL_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - WP_PATH=${WP_PATH}
+      - WP_ADMIN=${WP_ADMIN}
+      - WP_ADMIN_PASS=${WP_ADMIN_PASS}
+      - WP_ADMIN_MAIL=${WP_ADMIN_MAIL}
+      - WP_USER=${WP_USER}
+      - WP_USER_PASS=${WP_USER_PASS}
+      - WP_USER_MAIL=${WP_USER_MAIL}
+    ports:
+      - 9000:9000
+    restart: always
+    volumes:
+      - wp_data:/var/www/html/wordpress
+    networks:
+      - inception
+  nginx:
+    build:
+      context: ./requirements/nginx
+      args:
+        COUNTRY: ${COUNTRY}
+        STATE: ${STATE}
+        LOCALITY: ${LOCALITY}
+        ORGANIZATION: ${ORGANIZATION}
+        DOMAIN_NAME: ${DOMAIN_NAME}
+    container_name: nginx
+    depends_on:
+      - wordpress
+    ports:
+      - 443:443
+    restart: always
+    volumes:
+      - wp_data:/var/www/html/wordpress
+    networks:
+      - inception
+  phpmyadmin:
+    build:
+      context: ./requirements/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=172.16.64.10
+      - PMA_PORT=3306
+      - PMA_ABSOLUTE_URI=https://inceptionalice.duckdns.org/phpmyadmin/
+    networks:
+      - inception
+
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ../data/mysql
+  wp_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ../data/wordpress
+
+networks:
+  inception:
+    # Use a custom driver
+    driver: bridge

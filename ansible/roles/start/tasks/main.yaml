@@ -1,10 +1,10 @@
 - name: Waits for instances to become reachable
   ansible.builtin.wait_for_connection:
 
-- name: Clone project
-  ansible.builtin.git:
-    repo: https://github.com/alilin2508/Inception.git
-    dest: /home/cloud-1
+- name: Copy project
+  ansible.builtin.synchronize:
+    src: ../inception/
+    dest: /home/cloud-1/
 
 - name: Copy .env file
   ansible.builtin.copy:

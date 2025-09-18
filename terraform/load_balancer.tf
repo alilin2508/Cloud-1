@@ -11,6 +11,8 @@ resource "scaleway_lb_backend" "lb_out" {
   name             = "inception lb backend"
   forward_protocol = "http"
   forward_port     = "443"
+  sticky_sessions  = "cookie"
+  sticky_sessions_cookie_name = "inception"
   ignore_ssl_server_verify = true
   server_ips = [scaleway_instance_server.web.public_ip, scaleway_instance_server.web2.public_ip]
 }

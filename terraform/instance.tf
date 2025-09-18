@@ -24,6 +24,9 @@ resource "scaleway_instance_server" "web" {
   name = "Cloud-1 server"
   ip_id = scaleway_instance_ip.server_ip.id
   security_group_id = scaleway_instance_security_group.www.id
+  private_network {
+    pn_id  = scaleway_vpc_private_network.pn.id
+  }
 }
 
 resource "scaleway_instance_server" "web2" {
@@ -32,4 +35,7 @@ resource "scaleway_instance_server" "web2" {
   name = "Cloud-1 server 2"
   ip_id = scaleway_instance_ip.server2_ip.id
   security_group_id = scaleway_instance_security_group.www.id
+  private_network {
+    pn_id  = scaleway_vpc_private_network.pn.id
+  }
 }
