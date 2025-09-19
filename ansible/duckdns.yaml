@@ -1,0 +1,6 @@
+- hosts: all
+  gather_facts: no
+  roles:
+    - role: duckdns_update
+      vars:
+        duckdns_ip: "{{ inventory_hostname }}"

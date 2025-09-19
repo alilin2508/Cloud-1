@@ -1,0 +1,10 @@
+- name: Update DuckDNS IP
+  ansible.builtin.shell: >
+    curl -s "https://www.duckdns.org/update?domains={{ duckdns_domain }}&token={{ duckdns_token }}&ip={{ duckdns_ip }}"
+  register: duckdns_update_result
+  delegate_to: localhost
+  changed_when: "'OK' in duckdns_update_result.stdout"
+
+- name: Show DuckDNS result
+  debug:
+    var: duckdns_update_result.stdout
